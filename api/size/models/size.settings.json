@@ -1,0 +1,19 @@
+{
+  "kind": "collectionType",
+  "collectionName": "size",
+  "info": {
+    "name": "size"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "size": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    }
+  }
+}
