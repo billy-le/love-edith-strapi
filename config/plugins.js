@@ -1,10 +1,13 @@
 module.exports = ({ env }) => ({
   upload: {
-    provider: "cloudinary",
+    provider: "imagekit",
     providerOptions: {
-      cloud_name: env("CLOUDINARY_NAME"),
-      api_key: env("CLOUDINARY_KEY"),
-      api_secret: env("CLOUDINARY_SECRET"),
+      publicKey: env("IMAGEKIT_PUBLIC"),
+      privateKey: env("IMAGEKIT_PRIVATE"),
+      urlEndpoint: env("IMAGEKIT_URL"),
+      params: {
+        folder: env("IMAGEKIT_FOLDER"),
+      },
     },
   },
 });

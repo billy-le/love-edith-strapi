@@ -21,6 +21,11 @@
     },
     "products": {
       "collection": "product"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name",
+      "required": true
     }
   }
 }

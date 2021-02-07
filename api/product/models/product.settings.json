@@ -58,6 +58,17 @@
       "type": "uid",
       "targetField": "name",
       "required": true
+    },
+    "model_and_fit": {
+      "type": "text",
+      "unique": true
+    },
+    "fabric_and_care": {
+      "type": "text",
+      "unique": true
+    },
+    "size_chart": {
+      "type": "richtext"
     }
   }
 }

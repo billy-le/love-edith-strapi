@@ -24,6 +24,7 @@
     "strapi-plugin-upload": "3.4.6",
     "strapi-plugin-users-permissions": "3.4.6",
     "strapi-provider-upload-cloudinary": "^3.4.6",
+    "strapi-provider-upload-imagekit": "^0.2.1",
     "strapi-utils": "3.4.6"
   },
   "author": {
