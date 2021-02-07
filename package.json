@@ -10,6 +10,7 @@
     "strapi": "strapi"
   },
   "dependencies": {
+    "graphql": "^15.5.0",
     "knex": "<0.20.0",
     "pg": "latest",
     "pg-connection-string": "^2.1.0",
@@ -19,8 +20,10 @@
     "strapi-plugin-content-manager": "3.4.6",
     "strapi-plugin-content-type-builder": "3.4.6",
     "strapi-plugin-email": "3.4.6",
+    "strapi-plugin-graphql": "^3.4.6",
     "strapi-plugin-upload": "3.4.6",
     "strapi-plugin-users-permissions": "3.4.6",
+    "strapi-provider-upload-cloudinary": "^3.4.6",
     "strapi-utils": "3.4.6"
   },
   "author": {
@@ -30,7 +33,7 @@
     "uuid": "8db391a2-032b-4864-add6-d397218eff13"
   },
   "engines": {
-    "node": "12.16.3",
+    "node": ">=10.16.0 <=14.x.x",
     "npm": ">=6.0.0"
   },
   "license": "MIT"

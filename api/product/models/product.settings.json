@@ -17,7 +17,8 @@
       "unique": true
     },
     "description": {
-      "type": "text"
+      "type": "text",
+      "unique": true
     },
     "images": {
       "collection": "file",
@@ -29,22 +30,34 @@
       "required": false
     },
     "is_featured": {
-      "type": "boolean"
+      "type": "boolean",
+      "default": false,
+      "unique": true
     },
     "is_sold_out": {
-      "type": "boolean"
+      "type": "boolean",
+      "default": false,
+      "required": true
     },
     "is_discontinued": {
-      "type": "boolean"
+      "type": "boolean",
+      "unique": true,
+      "default": false
     },
     "price": {
       "type": "decimal",
       "required": true,
       "min": 0,
-      "default": 0
+      "default": 0,
+      "unique": true
     },
     "variants": {
       "collection": "variant"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name",
+      "required": true
     }
   }
 }
