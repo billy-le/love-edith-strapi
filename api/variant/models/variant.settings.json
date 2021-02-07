@@ -27,6 +27,13 @@
     },
     "size": {
       "model": "size"
+    },
+    "sold": {
+      "type": "integer",
+      "private": true,
+      "unique": true,
+      "min": 0,
+      "default": 0
     }
   }
 }

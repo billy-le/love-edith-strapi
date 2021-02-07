@@ -27,7 +27,7 @@
         "images"
       ],
       "plugin": "upload",
-      "required": false
+      "required": true
     },
     "is_featured": {
       "type": "boolean",
