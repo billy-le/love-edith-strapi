@@ -37,7 +37,8 @@
     "is_sold_out": {
       "type": "boolean",
       "default": false,
-      "required": true
+      "required": false,
+      "unique": true
     },
     "is_discontinued": {
       "type": "boolean",
@@ -48,10 +49,11 @@
       "type": "decimal",
       "required": true,
       "min": 0,
-      "default": 0,
+      "default": 1,
       "unique": true
     },
     "variants": {
+      "via": "product",
       "collection": "variant"
     },
     "slug": {

@@ -19,7 +19,7 @@
     "qty": {
       "type": "integer",
       "required": true,
-      "default": 0,
+      "default": 1,
       "min": 0
     },
     "color": {
@@ -31,9 +31,13 @@
     "sold": {
       "type": "integer",
       "private": true,
-      "unique": true,
+      "unique": false,
       "min": 0,
       "default": 0
+    },
+    "product": {
+      "model": "product",
+      "via": "variants"
     }
   }
 }

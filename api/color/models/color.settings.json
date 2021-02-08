@@ -12,7 +12,11 @@
   },
   "attributes": {
     "name": {
-      "type": "string",
+      "type": "enumeration",
+      "enum": [
+        "yellow",
+        "pink"
+      ],
       "required": true,
       "unique": true
     }

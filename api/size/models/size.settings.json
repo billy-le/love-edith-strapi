@@ -12,7 +12,14 @@
   },
   "attributes": {
     "name": {
-      "type": "string",
+      "type": "enumeration",
+      "enum": [
+        "xs",
+        "s",
+        "m",
+        "l",
+        "xl"
+      ],
       "required": true,
       "unique": true
     }
