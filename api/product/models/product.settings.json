@@ -18,7 +18,7 @@
     },
     "description": {
       "type": "text",
-      "unique": true
+      "unique": false
     },
     "images": {
       "collection": "file",
@@ -32,17 +32,17 @@
     "is_featured": {
       "type": "boolean",
       "default": false,
-      "unique": true
+      "unique": false
     },
     "is_sold_out": {
       "type": "boolean",
       "default": false,
       "required": false,
-      "unique": true
+      "unique": false
     },
     "is_discontinued": {
       "type": "boolean",
-      "unique": true,
+      "unique": false,
       "default": false
     },
     "price": {
@@ -50,11 +50,11 @@
       "required": true,
       "min": 0,
       "default": 1,
-      "unique": true
+      "unique": false
     },
     "variants": {
-      "via": "product",
-      "collection": "variant"
+      "collection": "variant",
+      "via": "product"
     },
     "slug": {
       "type": "uid",
@@ -63,11 +63,11 @@
     },
     "model_and_fit": {
       "type": "text",
-      "unique": true
+      "unique": false
     },
     "fabric_and_care": {
       "type": "text",
-      "unique": true
+      "unique": false
     },
     "size_chart": {
       "type": "richtext"
