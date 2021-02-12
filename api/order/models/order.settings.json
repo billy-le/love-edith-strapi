@@ -1,0 +1,62 @@
+{
+  "kind": "collectionType",
+  "collectionName": "orders",
+  "info": {
+    "name": "order",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "email": {
+      "type": "email",
+      "required": true,
+      "unique": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "contact": {
+      "type": "string"
+    },
+    "house_building_unit": {
+      "type": "string"
+    },
+    "street": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "barangay": {
+      "type": "string"
+    },
+    "province": {
+      "type": "string"
+    },
+    "region": {
+      "type": "string"
+    },
+    "products": {
+      "collection": "product"
+    },
+    "total": {
+      "type": "decimal"
+    },
+    "sub_total": {
+      "type": "decimal"
+    },
+    "shipping": {
+      "type": "decimal"
+    },
+    "order_number": {
+      "type": "string",
+      "unique": true,
+      "required": true
+    }
+  }
+}

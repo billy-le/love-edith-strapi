@@ -16,10 +16,6 @@
       "required": true,
       "unique": true
     },
-    "description": {
-      "type": "text",
-      "unique": false
-    },
     "images": {
       "collection": "file",
       "via": "related",
@@ -61,15 +57,16 @@
       "targetField": "name",
       "required": true
     },
+    "size_chart": {
+      "type": "richtext"
+    },
+    "description": {
+      "type": "richtext"
+    },
     "model_and_fit": {
-      "type": "text",
-      "unique": false
+      "type": "richtext"
     },
     "fabric_and_care": {
-      "type": "text",
-      "unique": false
-    },
-    "size_chart": {
       "type": "richtext"
     }
   }
