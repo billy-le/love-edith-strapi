@@ -14,35 +14,40 @@
     "email": {
       "type": "email",
       "required": true,
-      "unique": true
+      "unique": false,
+      "private": true
     },
     "name": {
       "type": "string",
       "required": true
     },
-    "contact": {
-      "type": "string"
+    "contact_number": {
+      "type": "string",
+      "private": true
     },
     "house_building_unit": {
-      "type": "string"
+      "type": "string",
+      "private": true
     },
     "street": {
-      "type": "string"
+      "type": "string",
+      "private": true
     },
     "city": {
-      "type": "string"
+      "type": "string",
+      "private": true
     },
     "barangay": {
-      "type": "string"
+      "type": "string",
+      "private": true
     },
     "province": {
-      "type": "string"
+      "type": "string",
+      "private": true
     },
     "region": {
-      "type": "string"
-    },
-    "products": {
-      "collection": "product"
+      "type": "string",
+      "private": true
     },
     "total": {
       "type": "decimal"
@@ -56,7 +61,31 @@
     "order_number": {
       "type": "string",
       "unique": true,
+      "required": false
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "pending",
+        "paid",
+        "shipped",
+        "delivered",
+        "cancelled",
+        "refunded"
+      ],
+      "default": "pending",
+      "required": true,
+      "private": false
+    },
+    "landmarks": {
+      "type": "text"
+    },
+    "items": {
+      "type": "json",
       "required": true
+    },
+    "uuid": {
+      "type": "uid"
     }
   }
 }

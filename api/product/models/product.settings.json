@@ -48,10 +48,6 @@
       "default": 1,
       "unique": false
     },
-    "variants": {
-      "collection": "variant",
-      "via": "product"
-    },
     "slug": {
       "type": "uid",
       "targetField": "name",
@@ -68,6 +64,10 @@
     },
     "fabric_and_care": {
       "type": "richtext"
+    },
+    "variants": {
+      "via": "product",
+      "collection": "variant"
     }
   }
 }

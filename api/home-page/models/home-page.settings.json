@@ -1,0 +1,32 @@
+{
+  "kind": "singleType",
+  "collectionName": "home_pages",
+  "info": {
+    "name": "home_page",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "hero_media": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "hero_text": {
+      "type": "text",
+      "unique": false
+    },
+    "cta_text": {
+      "type": "string"
+    }
+  }
+}

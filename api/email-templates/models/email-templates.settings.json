@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "email_templates",
+  "info": {
+    "name": "email_templates",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "invoice",
+        "receipt",
+        "cancellation"
+      ],
+      "required": true,
+      "unique": true
+    },
+    "subject": {
+      "type": "string",
+      "required": true
+    },
+    "content_top": {
+      "type": "richtext"
+    },
+    "content_bottom": {
+      "type": "richtext"
+    },
+    "banner": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false
+    }
+  }
+}
