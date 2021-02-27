@@ -14,8 +14,13 @@
     "name": {
       "type": "enumeration",
       "enum": [
+        "black",
+        "blue",
+        "lilac",
+        "pink",
+        "red",
         "yellow",
-        "pink"
+        "white"
       ],
       "required": true,
       "unique": true
