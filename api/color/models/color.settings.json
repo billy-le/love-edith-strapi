@@ -12,18 +12,9 @@
   },
   "attributes": {
     "name": {
-      "type": "enumeration",
-      "enum": [
-        "black",
-        "blue",
-        "lilac",
-        "pink",
-        "red",
-        "yellow",
-        "white"
-      ],
-      "required": true,
-      "unique": true
+      "type": "string",
+      "unique": true,
+      "required": true
     }
   }
 }

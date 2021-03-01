@@ -16,15 +16,6 @@
       "required": true,
       "unique": true
     },
-    "images": {
-      "collection": "file",
-      "via": "related",
-      "allowedTypes": [
-        "images"
-      ],
-      "plugin": "upload",
-      "required": true
-    },
     "is_featured": {
       "type": "boolean",
       "default": false,
@@ -66,8 +57,12 @@
       "type": "richtext"
     },
     "variants": {
-      "via": "product",
-      "collection": "variant"
+      "collection": "variant",
+      "via": "product"
+    },
+    "images": {
+      "model": "product-images",
+      "via": "product"
     }
   }
 }

@@ -36,8 +36,8 @@
       "default": 0
     },
     "product": {
-      "model": "product",
-      "via": "variants"
+      "via": "variants",
+      "model": "product"
     }
   }
 }

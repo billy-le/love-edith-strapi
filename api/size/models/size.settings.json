@@ -12,16 +12,9 @@
   },
   "attributes": {
     "name": {
-      "type": "enumeration",
-      "enum": [
-        "xs",
-        "s",
-        "m",
-        "l",
-        "xl"
-      ],
-      "required": true,
-      "unique": true
+      "type": "string",
+      "unique": true,
+      "required": true
     }
   }
 }
