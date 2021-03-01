@@ -61,7 +61,7 @@
       "via": "product"
     },
     "images": {
-      "model": "product-images",
+      "collection": "product-images",
       "via": "product"
     }
   }

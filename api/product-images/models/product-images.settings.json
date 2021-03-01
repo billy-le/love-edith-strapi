@@ -23,6 +23,11 @@
     "color": {
       "model": "color"
     },
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
     "product": {
       "via": "images",
       "model": "product"
