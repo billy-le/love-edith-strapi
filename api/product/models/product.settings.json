@@ -60,9 +60,9 @@
       "collection": "variant",
       "via": "product"
     },
-    "images": {
-      "collection": "product-images",
-      "via": "product"
+    "product_images": {
+      "via": "product",
+      "collection": "product-images"
     }
   }
 }

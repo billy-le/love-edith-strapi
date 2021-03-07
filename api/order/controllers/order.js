@@ -6,10 +6,11 @@
 const { v4 } = require("uuid");
 const randomatic = require("randomatic");
 const { sanitizeEntity } = require("strapi-utils");
+const math = require("mathjs");
 
 module.exports = {
   async create(ctx) {
-    const { email, items } = ctx.request.body;
+    const { email, items, shipping } = ctx.request.body;
 
     let products = JSON.parse(items);
     const variantIds = products.map((p) => Number(p.variantId));
@@ -50,7 +51,8 @@ module.exports = {
       uuid: v4(),
       order_number,
       sub_total,
-      total: sub_total,
+      total: math.chain(sub_total).add(shipping).done(),
+      shipping,
     });
 
     const orderTemplate = {
@@ -58,7 +60,7 @@ module.exports = {
       text: "",
       html: `
       <div style="background: blue">
-        This is awesome
+        Here is your order details
       </div>
     `,
     };
