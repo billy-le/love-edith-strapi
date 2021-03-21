@@ -109,6 +109,7 @@ module.exports = {
           html {
             line-height: 1.15;
             -webkit-text-size-adjust: 100%;
+            background: white;
           }
 
           body {
@@ -284,6 +285,10 @@ module.exports = {
           [hidden] {
             display: none;
           }
+
+          p {
+            font-size: 14px;
+          }
           </style>
 
         </head>
@@ -291,7 +296,7 @@ module.exports = {
         <div style="display: flex; justify-content: center">
         <img
           src="https://loveedith.netlify.app/assets/love-edith-logo.jpg"
-          height="100px"
+          height="40px"
         />
       </div>
 
@@ -445,13 +450,13 @@ module.exports = {
             Thank You
             <span
               ><img
-                src="https://loveedith.netlify.app/assets/hearts.png"
-                height="32px"
-                width="32px"
+                src="https://loveedith.netlify.app/assets/heart.png"
+                height="16px"
+                width="16px"
             /></span>
           </p>
-          <p>FB/IG</p>
-          <p>@LOVEEDITH.PH</p>
+          <p>IG: https://www.instagram.com/loveedith.ph/</p>
+          <p>FB: https://www.facebook.com/loveedith.ph/</p>
         </div>
       </div>
 
@@ -463,7 +468,10 @@ module.exports = {
     if (entity.id) {
       await strapi.plugins["email"].services.email.sendTemplatedEmail(
         {
-          to: email,
+          to:
+            process.env.NODE_ENV === "production"
+              ? email
+              : "lebilly87@gmail.com",
         },
         orderTemplate
       );
