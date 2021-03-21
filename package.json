@@ -10,6 +10,8 @@
     "strapi": "strapi"
   },
   "dependencies": {
+    "currency.js": "^2.0.3",
+    "date-fns": "^2.19.0",
     "graphql": "^15.5.0",
     "knex": "<0.20.0",
     "mathjs": "^9.2.0",
