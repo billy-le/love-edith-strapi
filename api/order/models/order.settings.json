@@ -86,6 +86,13 @@
     },
     "uuid": {
       "type": "uid"
+    },
+    "payment_method": {
+      "type": "enumeration",
+      "enum": [
+        "gcash",
+        "bpi"
+      ]
     }
   }
 }

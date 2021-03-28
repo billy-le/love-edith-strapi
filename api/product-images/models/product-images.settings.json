@@ -29,8 +29,8 @@
       "unique": true
     },
     "product": {
-      "model": "product",
-      "via": "product_images"
+      "via": "product_images",
+      "model": "product"
     }
   }
 }

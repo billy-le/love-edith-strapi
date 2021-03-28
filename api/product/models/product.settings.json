@@ -50,9 +50,6 @@
     "description": {
       "type": "richtext"
     },
-    "model_and_fit": {
-      "type": "richtext"
-    },
     "fabric_and_care": {
       "type": "richtext"
     },
@@ -61,8 +58,11 @@
       "via": "product"
     },
     "product_images": {
-      "via": "product",
-      "collection": "product-images"
+      "collection": "product-images",
+      "via": "product"
+    },
+    "categories": {
+      "collection": "category"
     }
   }
 }
