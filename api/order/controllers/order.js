@@ -30,7 +30,8 @@ const sizeMap = {
 module.exports = {
   async create(ctx) {
     const {
-      name,
+      first_name,
+      last_name,
       contact_number,
       house_building_unit,
       street,

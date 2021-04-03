@@ -17,7 +17,7 @@
       "unique": false,
       "private": true
     },
-    "name": {
+    "first_name": {
       "type": "string",
       "required": true
     },
@@ -93,6 +93,10 @@
         "gcash",
         "bpi"
       ]
+    },
+    "last_name": {
+      "type": "string",
+      "required": true
     }
   }
 }
