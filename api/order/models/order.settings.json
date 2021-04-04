@@ -97,6 +97,9 @@
     "last_name": {
       "type": "string",
       "required": true
+    },
+    "promos": {
+      "collection": "promo"
     }
   }
 }
