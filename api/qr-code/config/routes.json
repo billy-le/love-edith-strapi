@@ -1,0 +1,28 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/qr-code",
+      "handler": "qr-code.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/qr-code",
+      "handler": "qr-code.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/qr-code",
+      "handler": "qr-code.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

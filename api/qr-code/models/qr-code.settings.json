@@ -1,0 +1,23 @@
+{
+  "kind": "singleType",
+  "collectionName": "qr_codes",
+  "info": {
+    "name": "QR Code"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": true
+    }
+  }
+}
