@@ -191,6 +191,7 @@ module.exports = {
           },
           {
             subject: `An order has been placed: #${order_number}`,
+            text: "",
             html: htmlTemplate,
           }
         );
