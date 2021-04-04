@@ -179,6 +179,17 @@ module.exports = {
         },
         orderTemplate
       );
+      if (process.env.NODE_ENV === "production") {
+        await strapi.plugins["email"].services.email.sendTemplatedEmail(
+          {
+            to: "shop@love-edith.com",
+          },
+          {
+            subject: `An order has been placed: #${order_number}`,
+            html: htmlTemplate,
+          }
+        );
+      }
     }
 
     return sanitizeEntity(entity, { model: strapi.models.order });
