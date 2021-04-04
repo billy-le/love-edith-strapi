@@ -160,7 +160,7 @@ module.exports = {
       .join("")}<tr style="height:24px"></tr><tr><td><td>Subtotal</td><td>${PHP(
       sub_total
     ).format()}</td></tr><tr><td><td>Shipping</td><td>${
-      shipping === "0" ? "FREE" : PHP(shipping).format()
+      isFreeShipping || shipping === "0" ? "FREE" : PHP(shipping).format()
     }</td></tr>${
       discount
         ? `<tr><td><td>Discount - ${promo.percent_discount}% off</td><td>-${PHP(
