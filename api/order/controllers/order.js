@@ -171,9 +171,9 @@ module.exports = {
       hasItemsRemoved
         ? `<tr><td colspan="3" style="font-size: 10px">* Some items have been removed due to availability</td></tr>`
         : ""
-    }</tbody></table></td></tr><tr style="height:24px"></tr><tr><td><h4 style="margin:0;text-decoration-line:underline">Payment Method:</h4><p style="margin:0;">${payment}</p></td></tr><tr><td><h4 style="margin:0;text-decoration-line:underline">Payment Due Date:</h4><p style="margin:0">${dateFns.format(
+    }</tbody></table></td></tr><tr style="height:24px"></tr><tr><td><h4 style="margin:0;text-decoration-line:underline">Payment Method:</h4><p style="margin:0;">${payment}</p></td></tr><tr style="height:24px"></tr><tr><td><h4 style="margin:0;text-decoration-line:underline">Payment Due Date:</h4><p style="margin:0">${dateFns.format(
       dueDate,
-      "MMMM d0, yyyy"
+      "MMMM do, yyyy"
     )}</p></td></tr></tbody></table></body></html>
     `;
 
