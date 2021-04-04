@@ -93,7 +93,16 @@ module.exports = {
       ? math.chain(sub_total).multiply(`0.${promo.percent_discount}`).done()
       : 0;
 
-    const total = math.chain(sub_total).subtract(discount).add(shipping).done();
+    const isFreeShipping =
+      promo &&
+      promo.free_shipping &&
+      sub_total >= promo.free_shipping_threshold;
+
+    const total = math
+      .chain(sub_total)
+      .subtract(discount)
+      .add(isFreeShipping ? 0 : shipping)
+      .done();
 
     let order_number = randomatic("0", 9);
     let hasOrderNumberDefined = await strapi.services.order.findOne({
@@ -133,7 +142,7 @@ module.exports = {
         ? "Metro Manila"
         : "Outside Metro Manila";
 
-    const htmlTemplate = `<!DOCTYPE html><html lang="en" style="box-sizing:border-box"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Love Edith</title></head><body style="font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;border-collapse:collapse"><table cellspacing="0" cellpadding="0" border="0" bgcolor="#fff" style="width:100%"><thead><tr><th><h1 style="margin-bottom:24px">Love Edith</h1></th></tr></thead><tbody><tr><td colspan="4"><h4 style="margin:0;text-decoration-line:underline">Issued To:</h4><p style="margin:0">${first_name} ${last_name}</p><p style="margin:0">${email}</p><p style="margin:0">+63 ${contact_number}</p></td></tr><tr style="height:24px"></tr><tr><td><h4 style="margin:0;text-decoration-line:underline">Shipment Details:</h4><p style="margin:0">${house_building_unit} ${street}</p><p style="margin:0">Barangay ${barangay}, ${city}</p><p style="margin:0">${province} ${region}</p><p style="margin:0">${landmarks}</p></td></tr><tr style="height:24px"></tr><tr><td><h4 style="margin:0;text-decoration-line:underline">Shipping Method:</h4><p style="margin:0">${shipping_method}</p></td></tr><tr style="height:24px"></tr><tr><td><h4 style="margin:0;text-decoration-line:underline">Payment Method:</h4><p style="margin:0">${payment_method}</p><p style="margin:0;">${payment}</p></td></tr><tr style="height:24px"></tr><tr><td><table style="max-width:400px;text-align:left;border-collapse:collapse;width:100%"><thead><tr><th><h4 style="margin:0;text-decoration-line:underline">Items</h4></th></tr></thead><tbody>${products
+    const htmlTemplate = `<!DOCTYPE html><html lang="en" style="box-sizing:border-box"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Love Edith</title></head><body style="font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;border-collapse:collapse"><table cellspacing="0" cellpadding="0" border="0" bgcolor="#fff" style="width:100%"><thead><tr><th><h1 style="margin-bottom:24px">Love Edith</h1></th></tr></thead><tbody><tr><td colspan="4"><h4 style="margin:0;text-decoration-line:underline">Issued To:</h4><p style="margin:0">${first_name} ${last_name}</p><p style="margin:0">${email}</p><p style="margin:0">+63 ${contact_number}</p></td></tr><tr style="height:24px"></tr><tr><td><h4 style="margin:0;text-decoration-line:underline">Shipment Details:</h4><p style="margin:0">${house_building_unit} ${street}</p><p style="margin:0">Barangay ${barangay}, ${city}</p><p style="margin:0">${province} ${region}</p><p style="margin:0">${landmarks}</p></td></tr><tr style="height:24px"></tr><tr><td><h4 style="margin:0;text-decoration-line:underline">Shipping Method:</h4><p style="margin:0">${shipping_method}</p></td></tr><tr style="height:24px"></tr><tr style="height:24px"></tr><tr><td><table style="max-width:400px;text-align:left;border-collapse:collapse;width:100%"><thead><tr><th><h4 style="margin:0;text-decoration-line:underline">Items</h4></th></tr></thead><tbody>${products
       .map((item) => {
         const total = math.chain(item.qty).multiply(item.price).done();
         return `<tr><td>${
@@ -162,9 +171,9 @@ module.exports = {
       hasItemsRemoved
         ? `<tr><td colspan="3" style="font-size: 10px">* Some items have been removed due to availability</td></tr>`
         : ""
-    }</tbody></table></td></tr><tr style="height:24px"></tr><tr><td><h4 style="margin:0;text-decoration-line:underline">Payment Due Date:</h4><p style="margin:0">${dateFns.format(
+    }</tbody></table></td></tr><tr style="height:24px"></tr><tr><td><h4 style="margin:0;text-decoration-line:underline">Payment Method:</h4><p style="margin:0;">${payment}</p></td></tr><tr><td><h4 style="margin:0;text-decoration-line:underline">Payment Due Date:</h4><p style="margin:0">${dateFns.format(
       dueDate,
-      "MM/dd/yyyy"
+      "MMMM d0, yyyy"
     )}</p></td></tr></tbody></table></body></html>
     `;
 
