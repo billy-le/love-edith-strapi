@@ -139,7 +139,7 @@ module.exports = {
         ? "Metro Manila"
         : "Outside Metro Manila";
 
-    const htmlTemplate = `<!DOCTYPE html><html lang="en" style="box-sizing:border-box"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Love Edith</title></head><body style="font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;border-collapse:collapse"><table cellspacing="0" cellpadding="0" border="0" bgcolor="#fff" style="width:100%"><thead><tr><th><h2 style="margin-bottom:24px">Hi, love! &#9825; We've received your order.</h2></th></tr></thead><tbody><tr><td colspan="4"><h4 style="margin:0;text-decoration-line:underline">Issued To:</h4><p style="margin:0">${first_name} ${last_name}</p><p style="margin:0">${email}</p><p style="margin:0">+63 ${contact_number}</p></td></tr><tr style="height:24px"></tr><tr><td><h4 style="margin:0;text-decoration-line:underline">Shipment Details:</h4><p style="margin:0">${house_building_unit} ${street}</p><p style="margin:0">Barangay ${barangay}, ${city}</p><p style="margin:0">${province} ${region}</p><p style="margin:0">${landmarks}</p></td></tr><tr style="height:24px"></tr><tr><td><h4 style="margin:0;text-decoration-line:underline">Shipping Method:</h4><p style="margin:0">${shipping_method}</p></td></tr><tr style="height:24px"></tr><tr style="height:24px"></tr><tr><td><table style="max-width:400px;text-align:left;border-collapse:collapse;width:100%"><thead><tr><th><h4 style="margin:0;text-decoration-line:underline">Item</h4></th><th>Qty</th><th>Price</th><th>Total</th></tr></thead><tbody>${products
+    const htmlTemplate = `<!DOCTYPE html><html lang="en" style="box-sizing:border-box"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Love Edith</title></head><body style="font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;border-collapse:collapse"><table cellspacing="0" cellpadding="0" border="0" bgcolor="#fff" style="width:100%"><thead><tr><th><h2 style="margin-bottom:24px">Hi, love! &#9825; We've received your order.</h2></th></tr></thead><tbody><tr><td colspan="4"><h4 style="margin:0;text-decoration-line:underline">Issued To:</h4><p style="margin:0">${first_name} ${last_name}</p><p style="margin:0">${email}</p><p style="margin:0">+63 ${contact_number}</p></td></tr><tr style="height:24px"></tr><tr><td><h4 style="margin:0;text-decoration-line:underline">Shipment Details:</h4><p style="margin:0">${house_building_unit} ${street}</p><p style="margin:0">Barangay ${barangay}, ${city}</p><p style="margin:0">${province} ${region}</p><p style="margin:0">${landmarks}</p></td></tr><tr style="height:24px"></tr><tr><td><h4 style="margin:0;text-decoration-line:underline">Shipping Method:</h4><p style="margin:0">${shipping_method}</p></td></tr><tr style="height:24px"></tr><tr style="height:24px"></tr><tr><td><table style="max-width:400px;text-align:left;border-collapse:collapse;width:100%"><thead><tr><th>Item</h4></th><th>Qty</th><th>Price</th><th>Total</th></tr></thead><tbody>${products
       .map((item) => {
         const total = math.chain(item.qty).multiply(item.price).done();
         return `<tr><td>
@@ -155,26 +155,31 @@ module.exports = {
         <td>${PHP(total).format()}</td>
         </tr><tr style="height: 8px"></tr>`;
       })
-      .join("")}<tr style="height:24px"></tr><tr><td><td>Subtotal</td><td>${PHP(
+      .join(
+        ""
+      )}<tr style="height:24px; border-top: 1px solid black;"></tr><tr><td colspan="3">Subtotal</td><td>${PHP(
       sub_total
-    ).format()}</td></tr><tr><td><td>Shipping</td><td>${
+    ).format()}</td></tr><tr><td colspan="3">Shipping</td><td>${
       isFreeShipping || shipping === "0" ? "FREE" : PHP(shipping).format()
     }</td></tr>${
       discount
-        ? `<tr><td><td>Discount - ${promo.percent_discount}% off</td><td>-${PHP(
-            discount
-          ).format()}</td></tr>`
+        ? `<tr><td colspan="3">Discount - ${
+            promo.percent_discount
+          }% off</td><td>-${PHP(discount).format()}</td></tr>`
         : ""
-    }<tr style="border-top: 1px solid black;"><td><td style="font-weight: 500;">Total</td><td style="font-weight: 500;">${PHP(
+    }<tr style="border-top: 1px solid black;"><td colspan="3" style="font-weight: 500;">Total</td><td style="font-weight: 500;">${PHP(
       total
     ).format()}</td></tr>${
       hasItemsRemoved
-        ? `<tr><td colspan="3" style="font-size: 10px; padding-top: 8px;">* Some items have been removed due to availability</td></tr>`
+        ? `<tr><td colspan="4" style="font-size: 10px; padding-top: 8px;">* Some items have been removed due to availability</td></tr>`
         : ""
     }</tbody></table></td></tr><tr style="height:24px"></tr><tr><td><h4 style="margin:0;text-decoration-line:underline">Payment Method:</h4><p style="margin:0;">${payment}</p></td></tr><tr style="height:24px"></tr><tr><td><h4 style="margin:0;text-decoration-line:underline">Payment Due Date:</h4><p style="margin:0">${dateFns.format(
       dueDate,
       "MMMM do, yyyy"
-    )}</p></td></tr></tbody></table></body></html>
+    )}</p></td></tr>
+    </tbody></table>
+    <p style="margin: 0 8px 0 0;">Our sales associate will reach out to you shortly</p>
+    </body></html>
     `;
 
     const orderTemplate = {
