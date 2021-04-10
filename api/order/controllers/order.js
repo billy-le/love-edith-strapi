@@ -55,7 +55,7 @@ module.exports = {
     );
 
     let promo;
-    if (promos.length) {
+    if (promos?.length) {
       promo = await strapi.services.promo.findOne({ id: promos[0] });
     }
 
