@@ -26,6 +26,10 @@
       "type": "uid",
       "targetField": "name",
       "required": true
+    },
+    "discounts": {
+      "via": "sets",
+      "collection": "discount"
     }
   }
 }

@@ -38,6 +38,10 @@
     "product": {
       "via": "variants",
       "model": "product"
+    },
+    "discounts": {
+      "via": "variants",
+      "collection": "discount"
     }
   }
 }

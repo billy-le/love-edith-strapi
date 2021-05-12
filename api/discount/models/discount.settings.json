@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "discounts",
+  "info": {
+    "name": "discount",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "expiration_date": {
+      "type": "date",
+      "private": false,
+      "required": true
+    },
+    "discount_percent": {
+      "type": "decimal"
+    },
+    "categories": {
+      "collection": "category",
+      "via": "discounts",
+      "dominant": true
+    },
+    "products": {
+      "collection": "product",
+      "via": "discounts",
+      "dominant": true
+    },
+    "sets": {
+      "collection": "set",
+      "via": "discounts",
+      "dominant": true
+    },
+    "variants": {
+      "collection": "variant",
+      "via": "discounts",
+      "dominant": true
+    }
+  }
+}
