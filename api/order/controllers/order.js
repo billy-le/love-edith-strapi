@@ -1,3 +1,4 @@
+// @ts-check
 "use strict";
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/concepts/controllers.html#core-controllers)
@@ -19,14 +20,6 @@ function PHP(value) {
   });
 }
 
-const sizeMap = {
-  xs: "EXTRA SMALL",
-  s: "SMALL",
-  m: "MEDIUM",
-  l: "LARGE",
-  xl: "EXTRA LARGE",
-};
-
 module.exports = {
   async create(ctx) {
     const {
@@ -44,7 +37,7 @@ module.exports = {
       items,
       shipping,
       payment_method,
-      promos,
+      discount: _discount,
     } = ctx.request.body;
 
     let products = JSON.parse(items);
@@ -55,8 +48,8 @@ module.exports = {
     );
 
     let promo;
-    if (promos && promos.length) {
-      promo = await strapi.services.promo.findOne({ id: promos[0] });
+    if (_discount) {
+      promo = await strapi.services.discount.findOne({ id: _discount });
     }
 
     let removedProducts = [];
@@ -89,9 +82,20 @@ module.exports = {
       0
     );
 
-    const discount = promo
-      ? math.chain(sub_total).multiply(`0.${promo.percent_discount}`).done()
-      : 0;
+    let percentDiscount = 0;
+    let amountDiscount = 0;
+    if (promo) {
+      if (promo.amount >= promo.amount_threshold) {
+        amountDiscount = math.chain(amountDiscount).add(promo.amount).done();
+      }
+      if (promo.percent_discount >= promo.percent_discount_threshold) {
+        percentDiscount = math
+          .chain(sub_total)
+          .subtract(amountDiscount)
+          .multiply(math.chain(promo.percent_discount).divide(100).done())
+          .done();
+      }
+    }
 
     const isFreeShipping =
       promo &&
@@ -100,7 +104,8 @@ module.exports = {
 
     const total = math
       .chain(sub_total)
-      .subtract(discount)
+      .subtract(amountDiscount)
+      .subtract(percentDiscount)
       .add(isFreeShipping ? 0 : shipping)
       .done();
 
@@ -139,7 +144,7 @@ module.exports = {
         ? "Metro Manila"
         : "Outside Metro Manila";
 
-    const htmlTemplate = `<!DOCTYPE html><html lang="en" style="box-sizing:border-box"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Love Edith</title></head><body style="font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;border-collapse:collapse; font-size: 14px;"><table cellspacing="0" cellpadding="0" border="0" bgcolor="#fff" style="width:100%"><thead><tr><th><h2 style="font-size: 20px">Hi, love! &#9825;</h2><h2>We've received your order.</h2><p style="margin-bottom: 24px">We'll reach out to you soon. In the meantime, here is your order summary.</p></th></tr></thead><tbody><tr><td colspan="4"><h4 style="margin:0;text-decoration-line:underline">Issued To:</h4><p style="margin:0">${first_name} ${last_name}</p><p style="margin:0">${email}</p><p style="margin:0">+63 ${contact_number}</p></td></tr><tr style="height:24px"></tr><tr><td><h4 style="margin:0;text-decoration-line:underline">Shipment Details:</h4><p style="margin:0">${house_building_unit} ${street}</p><p style="margin:0">Barangay ${barangay}, ${city}</p><p style="margin:0">${province} ${region}</p><p style="margin:0">${landmarks}</p></td></tr><tr style="height:24px"></tr><tr><td><h4 style="margin:0;text-decoration-line:underline">Shipping Method:</h4><p style="margin:0">${shipping_method}</p></td></tr><tr style="height:24px"></tr><tr style="height:24px"></tr><tr><td><table style="max-width:400px;text-align:left;border-collapse:collapse;width:100%"><thead><tr><th>Item</h4></th><th>Qty</th><th>Price</th><th>Total</th></tr></thead><tbody>${products
+    const htmlTemplate = `<!DOCTYPE html><html lang="en" style="box-sizing:border-box"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>love, edith</title></head><body style="font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;border-collapse:collapse; font-size: 14px;"><table cellspacing="0" cellpadding="0" border="0" bgcolor="#fff" style="width:100%"><thead><tr><th><h2 style="font-size: 20px">Hi, love! &#9825;</h2><h2>We've received your order.</h2><p style="margin-bottom: 24px">We'll reach out to you soon. In the meantime, here is your order summary.</p></th></tr></thead><tbody><tr><td colspan="4"><h4 style="margin:0;text-decoration-line:underline">Issued To:</h4><p style="margin:0">${first_name} ${last_name}</p><p style="margin:0">${email}</p><p style="margin:0">+63 ${contact_number}</p></td></tr><tr style="height:24px"></tr><tr><td><h4 style="margin:0;text-decoration-line:underline">Shipment Details:</h4><p style="margin:0">${house_building_unit} ${street}</p><p style="margin:0">Barangay ${barangay}, ${city}</p><p style="margin:0">${province} ${region}</p><p style="margin:0">${landmarks}</p></td></tr><tr style="height:24px"></tr><tr><td><h4 style="margin:0;text-decoration-line:underline">Shipping Method:</h4><p style="margin:0">${shipping_method}</p></td></tr><tr style="height:24px"></tr><tr style="height:24px"></tr><tr><td><table style="max-width:400px;text-align:left;border-collapse:collapse;width:100%"><thead><tr><th>Item</h4></th><th>Qty</th><th>Price</th><th>Total</th></tr></thead><tbody>${products
       .map((item) => {
         const total = math.chain(item.qty).multiply(item.price).done();
         return `<tr><td>
@@ -162,10 +167,16 @@ module.exports = {
     ).format()}</td></tr><tr><td colspan="3">Shipping</td><td>${
       isFreeShipping || shipping === "0" ? "FREE" : PHP(shipping).format()
     }</td></tr>${
-      discount
+      amountDiscount
+        ? `<tr><td colspan="3">Discount</td><td>-${PHP(
+            amountDiscount
+          ).format()}</td></tr>`
+        : ""
+    }${
+      percentDiscount
         ? `<tr><td colspan="3">Discount - ${
             promo.percent_discount
-          }% off</td><td>-${PHP(discount).format()}</td></tr>`
+          }% off</td><td>-${PHP(percentDiscount).format()}</td></tr>`
         : ""
     }<tr style="border-top: 1px solid black;"><td colspan="3" style="font-weight: 500;">Total</td><td style="font-weight: 500;">${PHP(
       total

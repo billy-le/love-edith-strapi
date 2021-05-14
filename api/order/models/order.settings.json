@@ -98,8 +98,8 @@
       "type": "string",
       "required": true
     },
-    "promos": {
-      "collection": "promo"
+    "discount": {
+      "model": "discount"
     }
   }
 }

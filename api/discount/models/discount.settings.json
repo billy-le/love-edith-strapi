@@ -21,8 +21,12 @@
       "private": false,
       "required": true
     },
-    "discount_percent": {
-      "type": "decimal"
+    "percent_discount": {
+      "type": "integer",
+      "default": 0,
+      "required": true,
+      "max": 100,
+      "min": 0
     },
     "categories": {
       "collection": "category",
@@ -43,6 +47,39 @@
       "collection": "variant",
       "via": "discounts",
       "dominant": true
+    },
+    "details": {
+      "type": "text"
+    },
+    "is_featured": {
+      "type": "boolean",
+      "unique": false,
+      "default": false
+    },
+    "is_free_shipping": {
+      "type": "boolean",
+      "default": false
+    },
+    "free_shipping_threshold": {
+      "type": "integer",
+      "default": 0,
+      "min": 0
+    },
+    "amount": {
+      "type": "integer",
+      "min": 0,
+      "required": true,
+      "default": 0
+    },
+    "percent_discount_threshold": {
+      "type": "integer",
+      "min": 0,
+      "default": 0
+    },
+    "amount_threshold": {
+      "type": "integer",
+      "default": 0,
+      "min": 0
     }
   }
 }
