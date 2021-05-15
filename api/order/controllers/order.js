@@ -183,9 +183,7 @@ module.exports = {
       hasItemsRemoved
         ? `<tr><td colspan="4" style="font-size: 10px; padding-top: 8px;">* Some items have been removed due to availability</td></tr>`
         : ""
-    }</tbody></table></td></tr><tr style="height:24px"></tr><tr><td><h4 style="margin:0;text-decoration-line:underline">Payment Method:</h4><p style="margin:0;">${payment}</p><p style="margin:0;">Please expect our payment details in a separate e-mail within 24 to 48 hours.</p></td></tr><tr style="height:24px"></tr><tr><td><p style="margin:0">We can’t wait for you to receive your pieces and see you lounge in them!</p><p style="margin: 0;">Love, Edith</p></td></tr>
-    </tbody></table>
-    </body></html>
+    }</tbody></table></td></tr><tr style="height:24px"></tr><tr><td><h4 style="margin:0;text-decoration-line:underline">Payment Method: <span style="font-size: 16px;font-weight: 400;">${payment}</span></h4><tr style="height:24px"></tr><p style="margin:0;">Please expect our payment details in a separate e-mail within 24 to 48 hours.</p></td></tr><tr style="height:24px"></tr><tr><td><p style="margin:0">We can’t wait for you to receive your pieces and see you lounge in them!</p></td></tr><tr style="height:24px"></tr><tr><td><p style="margin:0">Love, Edith</p></td></tr></tbody></table></body></html>
     `;
 
     const orderTemplate = {
