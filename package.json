@@ -27,9 +27,8 @@
     "strapi-plugin-graphql": "^3.4.6",
     "strapi-plugin-upload": "^3.6.2",
     "strapi-plugin-users-permissions": "^3.6.2",
-    "strapi-provider-email-sendgrid": "^3.4.6",
-    "strapi-provider-upload-cloudinary": "^3.4.6",
-    "strapi-provider-upload-imagekit": "^0.2.1",
+    "strapi-provider-email-sendgrid": "^3.6.2",
+    "strapi-provider-upload-imagekit": "^0.2.3",
     "strapi-utils": "^3.6.2",
     "uuid": "^3.4.0"
   },
