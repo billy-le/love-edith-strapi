@@ -2,7 +2,7 @@
   "name": "love-edith-strapi",
   "private": true,
   "version": "0.1.0",
-  "description": "A Strapi application",
+  "description": "Love Edith Strapi",
   "scripts": {
     "develop": "strapi develop",
     "start": "strapi start",
@@ -18,23 +18,23 @@
     "pg": "latest",
     "pg-connection-string": "^2.1.0",
     "randomatic": "^3.1.1",
-    "strapi": "3.4.6",
-    "strapi-admin": "3.4.6",
-    "strapi-connector-bookshelf": "3.4.6",
-    "strapi-plugin-content-manager": "3.4.6",
-    "strapi-plugin-content-type-builder": "3.4.6",
-    "strapi-plugin-email": "3.4.6",
+    "strapi": "^3.6.2",
+    "strapi-admin": "^3.6.2",
+    "strapi-connector-bookshelf": "^3.6.2",
+    "strapi-plugin-content-manager": "^3.6.2",
+    "strapi-plugin-content-type-builder": "^3.6.2",
+    "strapi-plugin-email": "^3.6.2",
     "strapi-plugin-graphql": "^3.4.6",
-    "strapi-plugin-upload": "3.4.6",
-    "strapi-plugin-users-permissions": "3.4.6",
+    "strapi-plugin-upload": "^3.6.2",
+    "strapi-plugin-users-permissions": "^3.6.2",
     "strapi-provider-email-sendgrid": "^3.4.6",
     "strapi-provider-upload-cloudinary": "^3.4.6",
     "strapi-provider-upload-imagekit": "^0.2.1",
-    "strapi-utils": "3.4.6",
+    "strapi-utils": "^3.6.2",
     "uuid": "^3.4.0"
   },
   "author": {
-    "name": "A Strapi developer"
+    "name": "Billy Le"
   },
   "strapi": {
     "uuid": "8db391a2-032b-4864-add6-d397218eff13"
