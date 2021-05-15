@@ -115,7 +115,7 @@ module.exports = {
       .add(isFreeShipping ? 0 : shipping)
       .done();
 
-    let order_number = randomatic("0", 9);
+    let order_number = randomatic("0", 5);
     let hasOrderNumberDefined = await strapi.services.order.findOne({
       order_number,
     });
@@ -143,7 +143,7 @@ module.exports = {
 
     const payment = payment_method === "bpi" ? "BPI" : "GCASH";
 
-    const htmlTemplate = `<!DOCTYPE html><html lang="en" style="box-sizing:border-box"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>love, edith</title></head><body style="font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;border-collapse:collapse; font-size: 14px;"><table cellspacing="0" cellpadding="0" border="0" bgcolor="#fff" style="width:100%"><thead><tr><th><h2 style="font-size: 20px">Hi, love! &#9825;</h2><h2>We've received your order.</h2><p style="margin-bottom: 24px">We'll reach out to you soon. In the meantime, here is your order summary.</p></th></tr></thead><tbody><tr><td colspan="4"><h4 style="margin:0;text-decoration-line:underline">Issued To:</h4><p style="margin:0">${first_name} ${last_name}</p><p style="margin:0">${email}</p><p style="margin:0">+63 ${contact_number}</p></td></tr><tr style="height:24px"></tr><tr><td><h4 style="margin:0;text-decoration-line:underline">Shipment Details:</h4><p style="margin:0">${house_building_unit} ${street}</p><p style="margin:0">Barangay ${barangay}, ${city}</p><p style="margin:0">${province} ${region}</p><p style="margin:0">${landmarks}</p></td></tr><tr style="height:24px"></tr><tr><td><h4 style="margin:0;text-decoration-line:underline">Shipping Method:</h4><p style="margin:0">${shipping_method}</p></td></tr><tr style="height:24px"></tr><tr style="height:24px"></tr><tr><td><table style="max-width:400px;text-align:left;border-collapse:collapse;width:100%"><thead><tr><th>Item</h4></th><th>Qty</th><th>Price</th><th>Total</th></tr></thead><tbody>${products
+    const htmlTemplate = `<!DOCTYPE html><html lang="en" style="box-sizing:border-box"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>love, edith</title></head><body style="font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;border-collapse:collapse; font-size: 14px;"><table cellspacing="0" cellpadding="0" border="0" bgcolor="#fff" style="width:100%"><thead><tr><th><h2 style="font-size: 20px">Hi, love! &#9825;</h2><h2>Thank you for choosing Love, Edith!</h2><p style="margin-bottom: 24px">Your support means a lot to us. Here’s what’s coming your way:</p></th></tr></thead><tbody><tr><td colspan="4"><h4 style="margin:0;text-decoration-line:underline">Issued To:</h4><p style="margin:0">${first_name} ${last_name}</p><p style="margin:0">${email}</p><p style="margin:0">+63 ${contact_number}</p></td></tr><tr style="height:24px"></tr><tr><td><h4 style="margin:0;text-decoration-line:underline">Shipment Details:</h4><p style="margin:0">${house_building_unit} ${street}</p><p style="margin:0">Barangay ${barangay}, ${city}</p><p style="margin:0">${province} ${region}</p><p style="margin:0">${landmarks}</p></td></tr><tr style="height:24px"></tr><tr><td><h4 style="margin:0;text-decoration-line:underline">Shipping Method:</h4><p style="margin:0">${shipping_method}</p></td></tr><tr style="height:24px"></tr><tr style="height:24px"></tr><tr><td><table style="max-width:400px;text-align:left;border-collapse:collapse;width:100%"><thead><tr><th>Item</h4></th><th>Qty</th><th>Price</th><th>Total</th></tr></thead><tbody>${products
       .map((item) => {
         const total = math.chain(item.qty).multiply(item.price).done();
         return `<tr><td>
@@ -183,16 +183,13 @@ module.exports = {
       hasItemsRemoved
         ? `<tr><td colspan="4" style="font-size: 10px; padding-top: 8px;">* Some items have been removed due to availability</td></tr>`
         : ""
-    }</tbody></table></td></tr><tr style="height:24px"></tr><tr><td><h4 style="margin:0;text-decoration-line:underline">Payment Method:</h4><p style="margin:0;">${payment}</p></td></tr><tr style="height:24px"></tr><tr><td><h4 style="margin:0;text-decoration-line:underline">Payment Due Date:</h4><p style="margin:0">${dateFns.format(
-      dueDate,
-      "MMMM do, yyyy"
-    )}</p></td></tr>
+    }</tbody></table></td></tr><tr style="height:24px"></tr><tr><td><h4 style="margin:0;text-decoration-line:underline">Payment Method:</h4><p style="margin:0;">${payment}</p><p style="margin:0;">Please expect our payment details in a separate e-mail within 24 to 48 hours.</p></td></tr><tr style="height:24px"></tr><tr><td><p style="margin:0">We can’t wait for you to receive your pieces and see you lounge in them!</p><p style="margin: 0;">Love, Edith</p></td></tr>
     </tbody></table>
     </body></html>
     `;
 
     const orderTemplate = {
-      subject: `Order #${order_number}`,
+      subject: `We’ve got your order! #${order_number}`,
       text: "",
       html: htmlTemplate,
     };
