@@ -36,6 +36,7 @@ module.exports = {
       email,
       items,
       shipping,
+      shipping_method,
       payment_method,
       discount: _discount,
     } = ctx.request.body;
@@ -73,6 +74,10 @@ module.exports = {
       }
     }
 
+    const hasFreeShipping = !!products.find(
+      (product) => product.hasFreeShipping
+    );
+
     const sub_total = products.reduce(
       (sum, product) =>
         math
@@ -85,10 +90,10 @@ module.exports = {
     let percentDiscount = 0;
     let amountDiscount = 0;
     if (promo) {
-      if (promo.amount >= promo.amount_threshold) {
+      if (sub_total >= promo.amount_threshold) {
         amountDiscount = math.chain(amountDiscount).add(promo.amount).done();
       }
-      if (promo.percent_discount >= promo.percent_discount_threshold) {
+      if (sub_total >= promo.percent_discount_threshold) {
         percentDiscount = math
           .chain(sub_total)
           .subtract(amountDiscount)
@@ -98,9 +103,10 @@ module.exports = {
     }
 
     const isFreeShipping =
-      promo &&
-      promo.free_shipping &&
-      sub_total >= promo.free_shipping_threshold;
+      hasFreeShipping ||
+      (promo &&
+        promo.free_shipping &&
+        sub_total >= promo.free_shipping_threshold);
 
     const total = math
       .chain(sub_total)
@@ -136,13 +142,6 @@ module.exports = {
     const dueDate = dateFns.addHours(new Date(created_at), 48);
 
     const payment = payment_method === "bpi" ? "BPI" : "GCASH";
-
-    const shipping_method =
-      shipping == "0"
-        ? "Free"
-        : shipping === "79"
-        ? "Metro Manila"
-        : "Outside Metro Manila";
 
     const htmlTemplate = `<!DOCTYPE html><html lang="en" style="box-sizing:border-box"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>love, edith</title></head><body style="font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;border-collapse:collapse; font-size: 14px;"><table cellspacing="0" cellpadding="0" border="0" bgcolor="#fff" style="width:100%"><thead><tr><th><h2 style="font-size: 20px">Hi, love! &#9825;</h2><h2>We've received your order.</h2><p style="margin-bottom: 24px">We'll reach out to you soon. In the meantime, here is your order summary.</p></th></tr></thead><tbody><tr><td colspan="4"><h4 style="margin:0;text-decoration-line:underline">Issued To:</h4><p style="margin:0">${first_name} ${last_name}</p><p style="margin:0">${email}</p><p style="margin:0">+63 ${contact_number}</p></td></tr><tr style="height:24px"></tr><tr><td><h4 style="margin:0;text-decoration-line:underline">Shipment Details:</h4><p style="margin:0">${house_building_unit} ${street}</p><p style="margin:0">Barangay ${barangay}, ${city}</p><p style="margin:0">${province} ${region}</p><p style="margin:0">${landmarks}</p></td></tr><tr style="height:24px"></tr><tr><td><h4 style="margin:0;text-decoration-line:underline">Shipping Method:</h4><p style="margin:0">${shipping_method}</p></td></tr><tr style="height:24px"></tr><tr style="height:24px"></tr><tr><td><table style="max-width:400px;text-align:left;border-collapse:collapse;width:100%"><thead><tr><th>Item</h4></th><th>Qty</th><th>Price</th><th>Total</th></tr></thead><tbody>${products
       .map((item) => {
