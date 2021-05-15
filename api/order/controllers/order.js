@@ -8,7 +8,6 @@ const { v4 } = require("uuid");
 const randomatic = require("randomatic");
 const { sanitizeEntity } = require("strapi-utils");
 const math = require("mathjs");
-const dateFns = require("date-fns");
 const currency = require("currency.js");
 
 function PHP(value) {
@@ -138,10 +137,6 @@ module.exports = {
       total,
       shipping,
     });
-
-    const { created_at } = entity;
-
-    const dueDate = dateFns.addHours(new Date(created_at), 48);
 
     const payment = payment_method === "bpi" ? "BPI" : "GCASH";
 
