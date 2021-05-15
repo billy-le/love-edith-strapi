@@ -165,9 +165,7 @@ module.exports = {
         ""
       )}<tr style="height:24px; border-top: 1px solid black;"></tr><tr><td colspan="3">Subtotal</td><td>${PHP(
       sub_total
-    ).format()}</td></tr><tr><td colspan="3">Shipping</td><td>${
-      isFreeShipping || shipping === "0" ? "FREE" : PHP(shipping).format()
-    }</td></tr>${
+    ).format()}</td></tr>${
       amountDiscount
         ? `<tr><td colspan="3">Discount</td><td>-${PHP(
             amountDiscount
@@ -179,7 +177,9 @@ module.exports = {
             promo.percent_discount
           }% off</td><td>-${PHP(percentDiscount).format()}</td></tr>`
         : ""
-    }<tr style="border-top: 1px solid black;"><td colspan="3" style="font-weight: 500;">Total</td><td style="font-weight: 500;">${PHP(
+    }<tr><td colspan="3">Shipping</td><td>${
+      isFreeShipping || shipping === "0" ? "FREE" : PHP(shipping).format()
+    }</td></tr><tr style="border-top: 1px solid black;"><td colspan="3" style="font-weight: 500;">Total</td><td style="font-weight: 500;">${PHP(
       total
     ).format()}</td></tr>${
       hasItemsRemoved
