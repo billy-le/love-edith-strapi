@@ -1,4 +1,3 @@
-// @ts-check
 "use strict";
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/concepts/controllers.html#core-controllers)
@@ -150,6 +149,7 @@ module.exports = {
         }</span> | <span style="text-transform: uppercase;">${
           item.size
         }</span></div>
+        ${item.isPreorder ? "<div>Pre-order</div>" : ""}
         </td>
         <td>${item.qty}</td>
         <td>${PHP(item.price).format()}</td>

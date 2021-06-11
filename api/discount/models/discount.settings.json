@@ -34,8 +34,8 @@
       "dominant": true
     },
     "products": {
-      "collection": "product",
       "via": "discounts",
+      "collection": "product",
       "dominant": true
     },
     "sets": {

@@ -67,6 +67,10 @@
     "discounts": {
       "via": "products",
       "collection": "discount"
+    },
+    "is_preorder": {
+      "type": "boolean",
+      "default": false
     }
   }
 }
