@@ -37,6 +37,8 @@ module.exports = {
       shipping_method,
       payment_method,
       discount: _discount,
+      social_media,
+      social_media_account,
     } = ctx.request.body;
 
     let products = JSON.parse(items);
@@ -135,6 +137,8 @@ module.exports = {
       sub_total,
       total,
       shipping,
+      social_media,
+      social_media_account
     });
 
     const payment = payment_method === "bpi" ? "BPI" : "GCASH";

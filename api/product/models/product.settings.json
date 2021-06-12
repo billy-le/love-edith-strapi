@@ -71,6 +71,19 @@
     "is_preorder": {
       "type": "boolean",
       "default": false
+    },
+    "social_media_username": {
+      "type": "string",
+      "required": true
+    },
+    "social_media": {
+      "type": "enumeration",
+      "enum": [
+        "instagram",
+        "facebook"
+      ],
+      "required": true,
+      "default": "instagram"
     }
   }
 }

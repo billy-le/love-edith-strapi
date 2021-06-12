@@ -104,6 +104,16 @@
     "shipping_method": {
       "type": "string",
       "required": true
+    },
+    "social_media_account": {
+      "type": "string"
+    },
+    "social_media": {
+      "type": "enumeration",
+      "enum": [
+        "instagram",
+        "facebook"
+      ]
     }
   }
 }
